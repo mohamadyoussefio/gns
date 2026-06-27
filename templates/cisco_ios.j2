@@ -1,0 +1,120 @@
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname {{ router.name }}
+!
+boot-start-marker
+boot-end-marker
+!
+no ip domain-lookup
+ip routing
+ip cef
+ipv6 unicast-routing
+!
+!
+{% if router.loopback %}
+interface Loopback0
+ ip address {{ router.loopback.ip }} {{ router.loopback.mask }}
+ {% if router.interfaces.values()|selectattr("igp", "equalto", "ospf")|list|length > 0 %}
+ ip ospf 1 area 0
+ {% endif %}
+!
+{% endif %}
+!
+{% for name, intf in router.interfaces.items() %}
+interface {{ name }}
+ ip address {{ intf.ip }} {{ intf.mask }}
+ {% if intf.ospf_cost %}
+ ip ospf cost {{ intf.ospf_cost }}
+ {% endif %}
+ {% if intf.igp == "ospf" %}
+ ip ospf 1 area 0
+ {% endif %}
+!
+{% endfor %}
+!
+{% set has_rip = router.interfaces.values()|selectattr("igp", "equalto", "rip")|list|length > 0 %}
+{% if has_rip %}
+router rip
+ version 2
+ no auto-summary
+ network 10.0.0.0
+ {% for name, intf in router.interfaces.items() %}
+  {% if intf.igp != "rip" %}
+ passive-interface {{ name }}
+  {% endif %}
+ {% endfor %}
+!
+{% endif %}
+!
+{% set has_ospf = router.interfaces.values()|selectattr("igp", "equalto", "ospf")|list|length > 0 %}
+{% if has_ospf %}
+router ospf 1
+ router-id {{ router.loopback.ip }}
+ log-adjacency-changes
+!
+{% endif %}
+!
+router bgp {{ router.as }}
+ bgp router-id {{ router.loopback.ip }}
+ no synchronization
+ bgp log-neighbor-changes
+ {% if router.loopback %}
+ network {{ router.loopback.ip }} mask {{ router.loopback.mask }}
+ {% endif %}
+ {% for peer_name, peer in internal_bgp_peers %}
+ neighbor {{ peer.loopback.ip }} remote-as {{ router.as }}
+ neighbor {{ peer.loopback.ip }} update-source Loopback0
+ neighbor {{ peer.loopback.ip }} send-community
+  {% if border_router %}
+ neighbor {{ peer.loopback.ip }} next-hop-self
+  {% endif %}
+ {% endfor %}
+ !
+ {% for intf in external_bgp_interfaces %}
+ neighbor {{ intf.peer_ip }} remote-as {{ intf.peer_as }}
+ neighbor {{ intf.peer_ip }} send-community
+ neighbor {{ intf.peer_ip }} route-map RM_FROM_AS_{{ intf.peer_as }} in
+ neighbor {{ intf.peer_ip }} route-map RM_TO_AS_{{ intf.peer_as }} out
+ {% endfor %}
+!
+{% if border_router %}
+! -- BGP Policies for Business Relationships --
+ip as-path access-list 1 permit ^$
+!
+{% for intf in external_bgp_interfaces %}
+! Policy for AS {{ intf.peer_as }} (Relationship: {{ intf.relationship }})
+ip community-list standard CL_CUSTOMER permit {{ router.as }}:300
+!
+route-map RM_FROM_AS_{{ intf.peer_as }} permit 10
+ description Tag routes from AS {{ intf.peer_as }} ({{ intf.relationship }})
+ set community {{ router.as }}:{{ intf.comm_tag }} additive
+ set local-preference {{ intf.local_pref }}
+!
+route-map RM_TO_AS_{{ intf.peer_as }} permit 10
+ description Permit local routes
+ match as-path 1
+!
+route-map RM_TO_AS_{{ intf.peer_as }} permit 20
+ description Filter outgoing routes to AS {{ intf.peer_as }} ({{ intf.relationship }})
+ {% if intf.relationship == "customer" %}
+ ! Permit all routes to customer
+ {% else %}
+ ! Only export customer routes to Peer or Provider
+ match community CL_CUSTOMER
+ {% endif %}
+{% endfor %}
+{% endif %}
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+!
+end

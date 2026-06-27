@@ -1,0 +1,662 @@
+/* Network Automation Project Stylesheet - Clean Retro Inverted Monochrome Design */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+:root {
+  --bg-primary: #ffffff;       /* Pure white retro background */
+  --bg-secondary: #ffffff;     /* White panel background */
+  --border-color: #000000;     /* Stark black border */
+  --border-color-dim: #cccccc; /* Muted gray for inactive states */
+  --accent-blue: #000000;      /* Accents are monochrome black */
+  --accent-purple: #000000;
+  --accent-green: #000000;
+  --accent-red: #000000;
+  --accent-orange: #000000;
+  --text-primary: #000000;     /* Stark black text */
+  --text-secondary: #555555;   /* Gray text for secondary info */
+  --bg-input: #ffffff;
+  --panel-shadow: 6px 6px 0px 0px #000000; /* Crisp solid black shadow */
+}
+
+/* Custom Scrollbar Styling (Clean & Minimalist) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-left: 1px solid #000000;
+  border-top: 1px solid #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border: 1px solid #ffffff;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 !important; /* Force sharp corners on everything */
+}
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Clean Header Styling */
+.gcp-header {
+  background: #ffffff;
+  border-bottom: 2px solid var(--border-color);
+  height: 56px;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.gcp-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.gcp-logo {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  cursor: default;
+  display: flex;
+  user-select: none;
+}
+
+.gcp-logo span {
+  color: var(--text-primary) !important;
+}
+
+.gcp-divider {
+  color: var(--border-color);
+  font-weight: 400;
+  font-size: 20px;
+  user-select: none;
+}
+
+.gcp-sub-title {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.gcp-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.connection-badge {
+  background: #ffffff;
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.connection-badge.disconnected {
+  border-style: dashed;
+  color: var(--text-secondary);
+}
+
+.connection-badge::before {
+  content: '■';
+  font-size: 10px;
+  color: var(--text-primary);
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+}
+
+.connection-badge.disconnected::before {
+  content: 'x';
+  animation: none;
+}
+
+/* Dashboard Workspace Grid - More Spacing & Less Clutter */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr 400px;
+  flex: 1;
+  gap: 24px;
+  padding: 24px;
+  min-height: 0;
+  height: calc(100vh - 56px);
+}
+
+.panel {
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  box-shadow: var(--panel-shadow);
+}
+
+.panel-header {
+  padding: 12px 20px;
+  border-bottom: 2px solid var(--border-color);
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 48px;
+}
+
+.panel-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+}
+
+.panel-body {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 0;
+  background-color: #ffffff;
+}
+
+/* Buttons (Solid Black Retro Look) */
+.btn {
+  background: #000000;
+  border: 2px solid #000000;
+  color: #ffffff;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  user-select: none;
+  transition: background 0.1s step-end, color 0.1s step-end, border-color 0.1s step-end;
+}
+
+.btn:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #000000;
+}
+
+.btn:active {
+  background: #e5e5e5;
+  color: #000000;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  border: 2px solid var(--border-color);
+  color: #000000;
+}
+
+.btn-secondary:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.btn:disabled {
+  background: #ffffff !important;
+  color: var(--border-color-dim) !important;
+  border-color: var(--border-color-dim) !important;
+  cursor: not-allowed;
+}
+
+.btn-deploy {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* Intent JSON Code Editor */
+.editor-container {
+  flex: 1;
+  min-height: 0;
+  border: 2px solid var(--border-color);
+}
+
+#intent-editor {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  color: #000000;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  padding: 12px;
+  resize: none;
+  border: none;
+  outline: none;
+  line-height: 1.5;
+}
+
+/* Topology SVG Canvas */
+.topology-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+svg#topology-canvas {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+
+/* Retro Grid Background for SVG (Light Gray & Less Cluttered) */
+svg#topology-canvas {
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.node-group {
+  cursor: pointer;
+}
+
+.node-circle {
+  stroke-width: 2px !important;
+  fill: var(--bg-primary) !important;
+  transition: fill 0.1s step-end, stroke 0.1s step-end;
+}
+
+.node-circle.as-100 {
+  stroke: #1a73e8 !important;
+  stroke-dasharray: none;
+}
+
+.node-circle.as-200 {
+  stroke: #9c27b0 !important;
+  stroke-dasharray: 4 2;
+}
+
+.node-group:hover .node-circle.as-100 {
+  fill: #1a73e8 !important;
+  stroke: #000000 !important;
+}
+
+.node-group:hover .node-circle.as-200 {
+  fill: #9c27b0 !important;
+  stroke: #000000 !important;
+}
+
+.node-circle.selected {
+  stroke-width: 4px !important;
+  stroke-dasharray: 2 2;
+}
+
+.node-text {
+  font-weight: 700;
+  font-size: 11px;
+  font-family: 'IBM Plex Mono', monospace;
+  pointer-events: none;
+}
+
+.node-circle.as-100 ~ .node-text {
+  fill: #1a73e8 !important;
+}
+
+.node-circle.as-200 ~ .node-text {
+  fill: #9c27b0 !important;
+}
+
+.node-group:hover .node-text {
+  fill: #000000 !important;
+}
+
+.node-ip-text {
+  font-size: 9px;
+  fill: var(--text-secondary);
+  font-family: 'IBM Plex Mono', monospace;
+  pointer-events: none;
+}
+
+.node-core {
+  pointer-events: none;
+  transition: fill 0.1s step-end;
+}
+
+.node-circle.as-100 ~ .node-core {
+  fill: #1a73e8 !important;
+}
+
+.node-circle.as-200 ~ .node-core {
+  fill: #9c27b0 !important;
+}
+
+.node-group:hover .node-core {
+  fill: #ffffff !important;
+}
+
+/* Network Links (Retro Blueprint Schematics style) */
+.network-link {
+  stroke-opacity: 1 !important;
+  transition: stroke-width 0.1s;
+}
+
+.network-link.as-100 {
+  stroke: #1a73e8 !important;
+  stroke-width: 2.5px;
+  stroke-dasharray: none; /* RIP uses solid lines */
+}
+
+.network-link.as-200 {
+  stroke: #9c27b0 !important;
+  stroke-width: 2.5px;
+  stroke-dasharray: 6 4; /* OSPF uses dashed lines */
+}
+
+.network-link.inter-as {
+  stroke: #d93025 !important;
+  stroke-width: 3.5px;
+  stroke-dasharray: 2 4; /* eBGP boundary uses dotted lines */
+}
+
+.network-link:hover {
+  stroke-width: 5px !important;
+}
+
+/* Labels on links */
+.link-label {
+  font-size: 9px;
+  fill: var(--text-secondary);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  pointer-events: none;
+  background: #ffffff;
+}
+
+/* Details Box (Inspector) */
+.details-box {
+  background: #ffffff;
+  border: 2px solid var(--border-color);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+#details-node-name {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.details-label {
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.details-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Stepper Pipeline */
+.stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.step-icon {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+.step-name {
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* Stepper Status States */
+.step.pending .step-icon {
+  background: transparent;
+  border-color: var(--border-color-dim);
+  color: var(--border-color-dim);
+}
+.step.pending .step-name {
+  color: var(--border-color-dim);
+}
+
+.step.running .step-icon {
+  border-color: var(--border-color);
+  background: #ffffff;
+  color: var(--text-primary);
+  border-style: dashed;
+  animation: spin 8s linear infinite;
+}
+.step.running .step-name {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+.step.completed .step-icon {
+  background: #000000;
+  border-color: #000000;
+  color: #ffffff;
+}
+.step.completed .step-icon::before {
+  content: '✓';
+}
+.step.completed .step-name {
+  color: var(--text-primary);
+}
+
+.step.failed .step-icon {
+  background: #ffffff;
+  border-color: #000000;
+  color: #000000;
+  border-style: double;
+}
+.step.failed .step-icon::before {
+  content: 'X';
+}
+.step.failed .step-name {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* Terminal Console Log */
+.console-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 200px;
+  border: 2px solid var(--border-color);
+  overflow: hidden;
+}
+
+.console-header {
+  background: #ffffff;
+  border-bottom: 2px solid var(--border-color);
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+#console-log {
+  background: #ffffff;
+  padding: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  color: #000000;
+  flex: 1;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.log-line-info { color: #555555; }
+.log-line-success { color: #000000; font-weight: bold; }
+.log-line-warning { color: #000000; text-decoration: underline; }
+.log-line-error { color: #ffffff; background-color: #000000; font-weight: bold; padding: 2px 4px; margin: 2px 0; display: block; }
+
+/* Table styling (Grid look) */
+.address-table-panel {
+  grid-column: 1 / -1;
+  max-height: 240px;
+}
+
+.table-container {
+  overflow-y: auto;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  text-align: left;
+}
+
+th {
+  background: #ffffff;
+  padding: 10px 16px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-color-dim);
+  color: var(--text-primary);
+}
+
+tr:hover {
+  background: #f7f7f7;
+}
+
+.as-container {
+  position: absolute;
+  top: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid var(--border-color);
+  background: #ffffff;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+.as-container.x {
+  left: 12px;
+  color: #1a73e8;
+  border-color: #1a73e8;
+}
+
+.as-container.y {
+  right: 12px;
+  color: #9c27b0;
+  border-color: #9c27b0;
+}
+
+/* Cisco startup config box inside inspector */
+#router-config-view {
+  width: 100%;
+  height: 180px;
+  background: #ffffff;
+  color: #000000;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  border: 2px solid var(--border-color);
+  padding: 10px;
+  resize: none;
+  outline: none;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* Keyframe Animations */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* Maximize Canvas View */
+.dashboard-grid.canvas-maximized {
+  grid-template-columns: 1fr !important;
+}
+
+.dashboard-grid.canvas-maximized > .panel:not(#topology-panel) {
+  display: none !important;
+}

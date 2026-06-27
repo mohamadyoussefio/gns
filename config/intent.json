@@ -1,0 +1,420 @@
+{
+  "project_name": "Network_Automation_Project",
+  "gns3": {
+    "server_url": "http://localhost:3080",
+    "project_name": "Network_Automation_Project",
+    "router_template": "Cisco 7200 152-4.S5",
+    "node_symbol": ":/symbols/classic/router.svg",
+    "autostart": true
+  },
+  "ip_allocation": {
+    "strategy": "automated",
+    "as_networks": {
+      "100": {
+        "physical_range": "10.1.0.0/16",
+        "loopback_range": "10.1.100.0/24"
+      },
+      "200": {
+        "physical_range": "10.2.0.0/16",
+        "loopback_range": "10.2.100.0/24"
+      }
+    },
+    "inter_as_links": [
+      {
+        "routers": [
+          "R6",
+          "R8"
+        ],
+        "subnet": "10.254.0.0/30"
+      },
+      {
+        "routers": [
+          "R7",
+          "R9"
+        ],
+        "subnet": "10.254.0.4/30"
+      }
+    ]
+  },
+  "routers": {
+    "R1": {
+      "as": 100,
+      "loopback_id": 1,
+      "coordinates": {
+        "x": -500,
+        "y": 0
+      }
+    },
+    "R2": {
+      "as": 100,
+      "loopback_id": 2,
+      "coordinates": {
+        "x": -360,
+        "y": -90
+      }
+    },
+    "R3": {
+      "as": 100,
+      "loopback_id": 3,
+      "coordinates": {
+        "x": -360,
+        "y": 90
+      }
+    },
+    "R4": {
+      "as": 100,
+      "loopback_id": 4,
+      "coordinates": {
+        "x": -220,
+        "y": -90
+      }
+    },
+    "R5": {
+      "as": 100,
+      "loopback_id": 5,
+      "coordinates": {
+        "x": -220,
+        "y": 90
+      }
+    },
+    "R6": {
+      "as": 100,
+      "loopback_id": 6,
+      "coordinates": {
+        "x": -80,
+        "y": -45
+      }
+    },
+    "R7": {
+      "as": 100,
+      "loopback_id": 7,
+      "coordinates": {
+        "x": -80,
+        "y": 45
+      }
+    },
+    "R8": {
+      "as": 200,
+      "loopback_id": 8,
+      "coordinates": {
+        "x": 80,
+        "y": -45
+      }
+    },
+    "R9": {
+      "as": 200,
+      "loopback_id": 9,
+      "coordinates": {
+        "x": 80,
+        "y": 45
+      }
+    },
+    "R10": {
+      "as": 200,
+      "loopback_id": 10,
+      "coordinates": {
+        "x": 220,
+        "y": -90
+      }
+    },
+    "R11": {
+      "as": 200,
+      "loopback_id": 11,
+      "coordinates": {
+        "x": 220,
+        "y": 90
+      }
+    },
+    "R12": {
+      "as": 200,
+      "loopback_id": 12,
+      "coordinates": {
+        "x": 360,
+        "y": -90
+      }
+    },
+    "R13": {
+      "as": 200,
+      "loopback_id": 13,
+      "coordinates": {
+        "x": 360,
+        "y": 90
+      }
+    },
+    "R14": {
+      "as": 200,
+      "loopback_id": 14,
+      "coordinates": {
+        "x": 500,
+        "y": 0
+      }
+    }
+  },
+  "links": [
+    {
+      "nodes": [
+        "R1",
+        "R2"
+      ],
+      "interfaces": [
+        "FastEthernet0/0",
+        "FastEthernet0/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R1",
+        "R3"
+      ],
+      "interfaces": [
+        "FastEthernet1/0",
+        "FastEthernet1/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R2",
+        "R3"
+      ],
+      "interfaces": [
+        "FastEthernet1/0",
+        "FastEthernet0/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R2",
+        "R4"
+      ],
+      "interfaces": [
+        "FastEthernet1/1",
+        "FastEthernet0/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R3",
+        "R5"
+      ],
+      "interfaces": [
+        "FastEthernet2/0",
+        "FastEthernet0/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R4",
+        "R5"
+      ],
+      "interfaces": [
+        "FastEthernet1/0",
+        "FastEthernet1/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R4",
+        "R6"
+      ],
+      "interfaces": [
+        "FastEthernet1/1",
+        "FastEthernet0/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R4",
+        "R7"
+      ],
+      "interfaces": [
+        "FastEthernet2/0",
+        "FastEthernet0/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R5",
+        "R6"
+      ],
+      "interfaces": [
+        "FastEthernet1/1",
+        "FastEthernet1/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R5",
+        "R7"
+      ],
+      "interfaces": [
+        "FastEthernet2/0",
+        "FastEthernet1/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R6",
+        "R8"
+      ],
+      "interfaces": [
+        "FastEthernet2/0",
+        "FastEthernet2/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R7",
+        "R9"
+      ],
+      "interfaces": [
+        "FastEthernet2/0",
+        "FastEthernet2/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R8",
+        "R10"
+      ],
+      "interfaces": [
+        "FastEthernet0/0",
+        "FastEthernet0/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R8",
+        "R11"
+      ],
+      "interfaces": [
+        "FastEthernet1/0",
+        "FastEthernet0/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R9",
+        "R10"
+      ],
+      "interfaces": [
+        "FastEthernet0/0",
+        "FastEthernet1/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R9",
+        "R11"
+      ],
+      "interfaces": [
+        "FastEthernet1/0",
+        "FastEthernet1/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R10",
+        "R11"
+      ],
+      "interfaces": [
+        "FastEthernet1/1",
+        "FastEthernet1/1"
+      ]
+    },
+    {
+      "nodes": [
+        "R10",
+        "R12"
+      ],
+      "interfaces": [
+        "FastEthernet2/0",
+        "FastEthernet0/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R11",
+        "R13"
+      ],
+      "interfaces": [
+        "FastEthernet2/0",
+        "FastEthernet0/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R12",
+        "R13"
+      ],
+      "interfaces": [
+        "FastEthernet1/0",
+        "FastEthernet1/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R12",
+        "R14"
+      ],
+      "interfaces": [
+        "FastEthernet1/1",
+        "FastEthernet0/0"
+      ]
+    },
+    {
+      "nodes": [
+        "R13",
+        "R14"
+      ],
+      "interfaces": [
+        "FastEthernet1/1",
+        "FastEthernet1/0"
+      ]
+    }
+  ],
+  "protocols": {
+    "igp": {
+      "100": {
+        "type": "rip"
+      },
+      "200": {
+        "type": "ospf",
+        "ospf_process_id": 1
+      }
+    },
+    "ospf_costs": [
+      {
+        "nodes": [
+          "R9",
+          "R11"
+        ],
+        "cost": 50
+      },
+      {
+        "nodes": [
+          "R10",
+          "R11"
+        ],
+        "cost": 10
+      }
+    ],
+    "bgp": {
+      "100": {
+        "peers": {
+          "200": {
+            "relationship": "peer",
+            "remote_as": 200
+          }
+        }
+      },
+      "200": {
+        "peers": {
+          "100": {
+            "relationship": "peer",
+            "remote_as": 100
+          }
+        }
+      }
+    }
+  }
+}
