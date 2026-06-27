@@ -4,23 +4,23 @@ Use this structured test list as a script and visual guide during your video pre
 
 ---
 
-## 🖥️ Phase 1: GUI Web Console Demonstration (2 Minutes)
+## Phase 1: GUI Web Console Demonstration (2 Minutes)
 
 * **Objective**: Show the automated intent parser, retro styling, and inspector capabilities.
 * **Steps**:
   1. Open a browser and load **`http://localhost:8080`**.
   2. Point out the **Retro Monochrome Design** (IBM Plex Mono typography, sharp corners, solid shadows).
   3. Show the **Maximize Button**: Click **`[Maximize]`** on the Topology Canvas panel header to expand the network map full-screen, showing the colorized schematic SVG:
-     * 🟦 **Blue nodes/links** represent RIP (AS 100).
-     * 🟪 **Purple nodes/links** represent OSPF (AS 200).
-     * 🟥 **Red dashed lines** represent eBGP boundary links.
+     * Blue nodes/links represent RIP (AS 100).
+     * Purple nodes/links represent OSPF (AS 200).
+     * Red dashed lines represent eBGP boundary links.
   4. Click **`[Restore]`** to show the sidebars again.
   5. Select a router (e.g., **`R6`** or **`R10`**) from the topology diagram:
      * Show that the right **Operations Control Panel** dynamically loads its loopback IP, active physical interfaces, neighbor nodes, and the fully-generated **Cisco IOS startup-config**.
 
 ---
 
-## 🛣️ Phase 2: IGP Domain Verification (2 Minutes)
+## Phase 2: IGP Domain Verification (2 Minutes)
 
 * **Objective**: Verify RIP (AS X) and OSPF (AS Y) are functioning correctly and that loopbacks are routable within each domain.
 * **Commands to run**:
@@ -42,7 +42,7 @@ Use this structured test list as a script and visual guide during your video pre
 
 ---
 
-## 🤝 Phase 3: BGP Peerings & Relationship Policies (3 Minutes)
+## Phase 3: BGP Peerings & Relationship Policies (3 Minutes)
 
 * **Objective**: Prove BGP is peering correctly and enforcing business relationships.
 * **Commands to run**:
@@ -70,7 +70,7 @@ Use this structured test list as a script and visual guide during your video pre
 
 ---
 
-## 🔗 Phase 4: End-to-End Connectivity (1 Minute)
+## Phase 4: End-to-End Connectivity (1 Minute)
 
 * **Objective**: Prove end-to-end connectivity across RIP, BGP, and OSPF boundaries.
 * **Commands to run**:
