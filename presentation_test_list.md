@@ -88,3 +88,20 @@ Use this structured test list as a script and visual guide during your video pre
   R14# ping 10.1.100.1 source Loopback0
   ```
   * **What to highlight**: Another **100% success rate (5/5)**, confirming bidirectional data plane functionality.
+
+  ### Traceroute across RIP, BGP, and OSPF Boundaries
+  Run a traceroute from R1 (AS X RIP) to R14 (AS Y OSPF) sourcing from Loopback0:
+  ```ios
+  R1# traceroute 10.2.100.14 source Loopback0 numeric
+  ```
+  * **What to highlight**: Explain the hops demonstrating path routing:
+    * Internal AS X hops via RIP (e.g. `10.1.0.x`).
+    * The eBGP boundary hop crossing AS boundaries (`10.254.0.2`).
+    * Internal AS Y hops via OSPF (e.g. `10.2.0.x`) ending at R14 (`10.2.100.14`).
+
+  ### Reverse Traceroute
+  Run a traceroute from R14 (AS Y OSPF) to R1 (AS X RIP) sourcing from Loopback0:
+  ```ios
+  R14# traceroute 10.1.100.1 source Loopback0 numeric
+  ```
+  * **What to highlight**: Observe the return path hops showing symmetric or asymmetric routing configurations.
