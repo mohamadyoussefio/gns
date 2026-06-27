@@ -12,7 +12,7 @@ It features a **retro monochrome** web dashboard with a clean light-mode CRT vis
 * **Cisco IOS Config Generator**: Uses Jinja2 templates to generate `.cfg` startup files. It automatically sets up hostnames, IP interfaces, OSPF (for AS Y/AS 200), RIPv2 (for AS X/AS 100), and creates a full mesh of iBGP connections inside both ASs.
 * **BGP Policy Tagging**: Implements routing policies for different BGP relationships (like customer, peer, or provider). It tags routes with BGP communities and sets local preferences. It also uses empty AS-path filters (`^$`) so border routers actually advertise their own AS loopbacks.
 * **Automatic GNS3 Deployment**: Integrates with the GNS3 REST API. It connects to the local GNS3 server, cleans up the canvas, places the Cisco 7200 routers using X/Y coordinates, wires up all the links, uploads the generated configurations, and starts all the nodes.
-* ** Web Dashboard**: A control panel built with standard HTML/CSS/JS. It lets you:
+* **Web Dashboard**: A control panel built with standard HTML/CSS/JS. It lets you:
   * Click a **`[Maximize]`** button to make the topology map full-screen.
   * See the network topology rendered as colored SVG lines (blue for RIP, purple for OSPF, red for eBGP).
   * Click on any router to inspect its interface IP addresses and read its generated startup configuration.
